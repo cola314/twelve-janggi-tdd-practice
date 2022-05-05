@@ -1,4 +1,5 @@
 import { GameState } from './game-state';
+import { SquareId } from './square-id';
 
 export class Game {
   gameState: GameState;
@@ -10,7 +11,7 @@ export class Game {
     return this.gameState;
   }
 
-  select(x: number, y: number) {
-    this.gameState.select(x, y);
+  select(squareId: SquareId) {
+    this.gameState.select(squareId);
   }
 }

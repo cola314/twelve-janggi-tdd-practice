@@ -1,46 +1,33 @@
 import { Square } from './square';
 import { Piece } from './peice/piece';
+import { SquareId } from './square-id';
 
 export class GameState {
-  board: Square[][];
+  squares: Square[];
   constructor() {
-    this.board = [
-      [
-        new Square(Piece.Jang('Top')),
-        new Square(Piece.King('Top')),
-        new Square(Piece.Sang('Top')),
-      ],
-      [
-        new Square(Piece.Empty()),
-        new Square(Piece.Ja('Top')),
-        new Square(Piece.Empty()),
-      ],
-      [
-        new Square(Piece.Empty()),
-        new Square(Piece.Ja('Bottom')),
-        new Square(Piece.Empty()),
-      ],
-      [
-        new Square(Piece.Sang('Bottom')),
-        new Square(Piece.King('Bottom')),
-        new Square(Piece.Jang('Bottom')),
-      ],
+    this.squares = [
+      new Square(Piece.jang('Top')),
+      new Square(Piece.king('Top')),
+      new Square(Piece.sang('Top')),
+      new Square(Piece.empty()),
+      new Square(Piece.ja('Top')),
+      new Square(Piece.empty()),
+      new Square(Piece.empty()),
+      new Square(Piece.ja('Bottom')),
+      new Square(Piece.empty()),
+      new Square(Piece.sang('Bottom')),
+      new Square(Piece.king('Bottom')),
+      new Square(Piece.jang('Bottom')),
     ];
   }
 
-  getSquare(x: number, y: number): Square {
-    return this.board[y - 1][x - 1];
+  getSquare(squareId: SquareId): Square {
+    return this.squares[squareId.id];
   }
 
-  select(x: number, y: number) {
-    this.board.forEach((squares, i) => {
-      squares.forEach((square, j) => {
-        if (i == y - 1 && j == x - 1) {
-          square.isSelected = true;
-        } else {
-          square.isSelected = false;
-        }
-      });
+  select(squareId: SquareId) {
+    this.squares.forEach((square, id) => {
+      square.isSelected = id == squareId.id;
     });
   }
 }

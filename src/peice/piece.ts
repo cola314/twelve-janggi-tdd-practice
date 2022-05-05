@@ -24,27 +24,27 @@ export class Piece {
     return piece;
   }
 
-  static King(owner: PlayerType): Piece {
+  static king(owner: PlayerType): Piece {
     return Piece.getCachedPiece('King', owner);
   }
 
-  static Sang(owner: PlayerType): Piece {
+  static sang(owner: PlayerType): Piece {
     return Piece.getCachedPiece('Sang', owner);
   }
 
-  static Jang(owner: PlayerType): Piece {
+  static jang(owner: PlayerType): Piece {
     return Piece.getCachedPiece('Jang', owner);
   }
 
-  static Ja(owner: PlayerType): Piece {
+  static ja(owner: PlayerType): Piece {
     return Piece.getCachedPiece('Ja', owner);
   }
 
-  static Hu(owner: PlayerType): Piece {
+  static hu(owner: PlayerType): Piece {
     return Piece.getCachedPiece('Hu', owner);
   }
 
-  static Empty() {
+  static empty() {
     return Piece.getCachedPiece('Empty', 'None');
   }
 }
