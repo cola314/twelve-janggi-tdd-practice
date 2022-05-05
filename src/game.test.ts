@@ -1,5 +1,5 @@
 import { Game } from './game';
-import { PieceType } from './square';
+import { PieceType, PlayerType } from './square';
 
 test('get initial game board state', () => {
   let game = new Game();
@@ -16,6 +16,23 @@ test('get initial game board state', () => {
   expect(state.getSquare(1, 4).getType()).toBe(PieceType.Sang);
   expect(state.getSquare(2, 4).getType()).toBe(PieceType.King);
   expect(state.getSquare(3, 4).getType()).toBe(PieceType.Jang);
+});
+
+test('get initial game board state and check piece owner', () => {
+  let game = new Game();
+  let state = game.getGameState();
+  expect(state.getSquare(1, 1).getOwner()).toBe(PlayerType.Top);
+  expect(state.getSquare(2, 1).getOwner()).toBe(PlayerType.Top);
+  expect(state.getSquare(3, 1).getOwner()).toBe(PlayerType.Top);
+  expect(state.getSquare(1, 2).getOwner()).toBe(PlayerType.None);
+  expect(state.getSquare(2, 2).getOwner()).toBe(PlayerType.Top);
+  expect(state.getSquare(3, 2).getOwner()).toBe(PlayerType.None);
+  expect(state.getSquare(1, 3).getOwner()).toBe(PlayerType.None);
+  expect(state.getSquare(2, 3).getOwner()).toBe(PlayerType.Down);
+  expect(state.getSquare(3, 3).getOwner()).toBe(PlayerType.None);
+  expect(state.getSquare(1, 4).getOwner()).toBe(PlayerType.Down);
+  expect(state.getSquare(2, 4).getOwner()).toBe(PlayerType.Down);
+  expect(state.getSquare(3, 4).getOwner()).toBe(PlayerType.Down);
 });
 
 test('select square then square selected', () => {

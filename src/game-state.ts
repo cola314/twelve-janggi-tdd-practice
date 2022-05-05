@@ -1,28 +1,28 @@
-import { PieceType, Square } from './square';
+import { PieceType, PlayerType, Square } from './square';
 
 export class GameState {
   board: Square[][];
   constructor() {
     this.board = [
       [
-        new Square(PieceType.Jang),
-        new Square(PieceType.King),
-        new Square(PieceType.Sang),
+        new Square(PieceType.Jang, PlayerType.Top),
+        new Square(PieceType.King, PlayerType.Top),
+        new Square(PieceType.Sang, PlayerType.Top),
       ],
       [
-        new Square(PieceType.Empty),
-        new Square(PieceType.Ja),
-        new Square(PieceType.Empty),
+        new Square(PieceType.Empty, PlayerType.None),
+        new Square(PieceType.Ja, PlayerType.Top),
+        new Square(PieceType.Empty, PlayerType.None),
       ],
       [
-        new Square(PieceType.Empty),
-        new Square(PieceType.Ja),
-        new Square(PieceType.Empty),
+        new Square(PieceType.Empty, PlayerType.None),
+        new Square(PieceType.Ja, PlayerType.Down),
+        new Square(PieceType.Empty, PlayerType.None),
       ],
       [
-        new Square(PieceType.Sang),
-        new Square(PieceType.King),
-        new Square(PieceType.Jang),
+        new Square(PieceType.Sang, PlayerType.Down),
+        new Square(PieceType.King, PlayerType.Down),
+        new Square(PieceType.Jang, PlayerType.Down),
       ],
     ];
   }

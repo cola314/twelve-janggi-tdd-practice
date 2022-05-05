@@ -7,12 +7,20 @@ export enum PieceType {
   Empty = 'Empty',
 }
 
+export enum PlayerType {
+  None,
+  Top,
+  Down,
+}
+
 export class Square {
   private readonly type: PieceType;
   private _isSelected: boolean;
+  private owner: PlayerType;
 
-  constructor(type: PieceType) {
+  constructor(type: PieceType, owner: PlayerType) {
     this.type = type;
+    this.owner = owner;
     this._isSelected = false;
   }
 
@@ -26,5 +34,9 @@ export class Square {
 
   getType(): PieceType {
     return this.type;
+  }
+
+  getOwner() {
+    return this.owner;
   }
 }
