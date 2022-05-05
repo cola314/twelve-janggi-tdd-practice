@@ -30,4 +30,16 @@ export class GameState {
   getSquare(x: number, y: number): Square {
     return this.board[y - 1][x - 1];
   }
+
+  select(x: number, y: number) {
+    this.board.forEach((squares, i) => {
+      squares.forEach((square, j) => {
+        if (i == y - 1 && j == x - 1) {
+          square.changeSelect(true);
+        } else {
+          square.changeSelect(false);
+        }
+      });
+    });
+  }
 }

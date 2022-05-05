@@ -8,10 +8,20 @@ export enum PieceType {
 }
 
 export class Square {
-  type: PieceType;
+  private readonly type: PieceType;
+  private _isSelected: boolean;
 
   constructor(type: PieceType) {
     this.type = type;
+    this._isSelected = false;
+  }
+
+  changeSelect(select: boolean) {
+    this._isSelected = select;
+  }
+
+  isSelected() {
+    return this._isSelected;
   }
 
   getType(): PieceType {

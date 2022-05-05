@@ -17,3 +17,17 @@ test('get initial game board state', () => {
   expect(state.getSquare(2, 4).getType()).toBe(PieceType.King);
   expect(state.getSquare(3, 4).getType()).toBe(PieceType.Jang);
 });
+
+test('select square then square selected', () => {
+  let game = new Game();
+  game.select(1, 1);
+  expect(game.getGameState().getSquare(1, 1).isSelected()).toBe(true);
+});
+
+test('select square then other square to be not selected', () => {
+  let game = new Game();
+  game.select(1, 1);
+  game.select(1, 2);
+  expect(game.getGameState().getSquare(1, 1).isSelected()).toBe(false);
+  expect(game.getGameState().getSquare(1, 2).isSelected()).toBe(true);
+});
