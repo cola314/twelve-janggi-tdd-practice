@@ -1,42 +1,11 @@
-export enum PieceType {
-  King = 'King',
-  Sang = 'Sang',
-  Jang = 'Jang',
-  Ja = 'Ja',
-  Hu = 'Hu',
-  Empty = 'Empty',
-}
-
-export enum PlayerType {
-  None,
-  Top,
-  Down,
-}
+import { Piece } from './peice/piece';
 
 export class Square {
-  private readonly type: PieceType;
-  private _isSelected: boolean;
-  private owner: PlayerType;
+  piece: Piece;
+  isSelected: boolean;
 
-  constructor(type: PieceType, owner: PlayerType) {
-    this.type = type;
-    this.owner = owner;
-    this._isSelected = false;
-  }
-
-  changeSelect(select: boolean) {
-    this._isSelected = select;
-  }
-
-  isSelected() {
-    return this._isSelected;
-  }
-
-  getType(): PieceType {
-    return this.type;
-  }
-
-  getOwner() {
-    return this.owner;
+  constructor(piece: Piece = Piece.Empty()) {
+    this.isSelected = false;
+    this.piece = piece;
   }
 }

@@ -1,28 +1,29 @@
-import { PieceType, PlayerType, Square } from './square';
+import { Square } from './square';
+import { Piece } from './peice/piece';
 
 export class GameState {
   board: Square[][];
   constructor() {
     this.board = [
       [
-        new Square(PieceType.Jang, PlayerType.Top),
-        new Square(PieceType.King, PlayerType.Top),
-        new Square(PieceType.Sang, PlayerType.Top),
+        new Square(Piece.Jang('Top')),
+        new Square(Piece.King('Top')),
+        new Square(Piece.Sang('Top')),
       ],
       [
-        new Square(PieceType.Empty, PlayerType.None),
-        new Square(PieceType.Ja, PlayerType.Top),
-        new Square(PieceType.Empty, PlayerType.None),
+        new Square(Piece.Empty()),
+        new Square(Piece.Ja('Top')),
+        new Square(Piece.Empty()),
       ],
       [
-        new Square(PieceType.Empty, PlayerType.None),
-        new Square(PieceType.Ja, PlayerType.Down),
-        new Square(PieceType.Empty, PlayerType.None),
+        new Square(Piece.Empty()),
+        new Square(Piece.Ja('Bottom')),
+        new Square(Piece.Empty()),
       ],
       [
-        new Square(PieceType.Sang, PlayerType.Down),
-        new Square(PieceType.King, PlayerType.Down),
-        new Square(PieceType.Jang, PlayerType.Down),
+        new Square(Piece.Sang('Bottom')),
+        new Square(Piece.King('Bottom')),
+        new Square(Piece.Jang('Bottom')),
       ],
     ];
   }
@@ -35,9 +36,9 @@ export class GameState {
     this.board.forEach((squares, i) => {
       squares.forEach((square, j) => {
         if (i == y - 1 && j == x - 1) {
-          square.changeSelect(true);
+          square.isSelected = true;
         } else {
-          square.changeSelect(false);
+          square.isSelected = false;
         }
       });
     });
