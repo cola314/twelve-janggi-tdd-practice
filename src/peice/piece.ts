@@ -68,6 +68,9 @@ class PieceJa extends Piece {
   }
 
   movableArea(squareId: SquareId): SquareId[] {
+    if (squareId.isCaptiveArea()) {
+      return SquareId.playerAllowedArea(this.owner as PlayerType);
+    }
     if (this.owner == 'Top') {
       return [squareId.addCoordinateOrNull(0, 1)].filter(x => x !== null);
     } else {

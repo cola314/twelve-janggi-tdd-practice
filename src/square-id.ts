@@ -1,5 +1,6 @@
 import { PlayerType } from './player';
 import { Board } from './board';
+import { OwnerType } from './peice/piece';
 
 interface Coordinate {
   x: number;
@@ -95,5 +96,17 @@ export class SquareId {
       return SquareId.fromBoardOrNull(cd.x + dx, cd.y + dy);
     }
     return null;
+  }
+
+  static playerAllowedArea(owner: PlayerType): SquareId[] {
+    if (owner === 'Top') {
+      return [...Array(9)].map((_, i) => new SquareId(i));
+    } else {
+      return [...Array(9)].map((_, i) => new SquareId(i + 3));
+    }
+  }
+
+  isCaptiveArea() {
+    return this.id >= Board.BOARD_WIDTH * Board.BOARD_HEIGHT;
   }
 }
