@@ -1,4 +1,5 @@
 import { PlayerType } from './player';
+import { Board } from './board';
 
 /**
 |--------------------|
@@ -13,9 +14,6 @@ import { PlayerType } from './player';
 |--------------------|
  */
 export class SquareId {
-  private static readonly BOARD_WIDTH = 3;
-  private static readonly BOARD_HEIGHT = 4;
-  private static readonly CAPTIVE_AREA_SIZE = 6;
   readonly id: number;
 
   private constructor(id: number) {
@@ -31,7 +29,7 @@ export class SquareId {
   static fromBoard(x: number, y: number) {
     x--;
     y--;
-    return new SquareId(x + y * this.BOARD_WIDTH);
+    return new SquareId(x + y * Board.BOARD_WIDTH);
   }
 
   /**
@@ -42,8 +40,12 @@ export class SquareId {
    */
   static fromCaptive(player: PlayerType, index: number): SquareId {
     index--;
-    let id = this.BOARD_WIDTH * this.BOARD_HEIGHT + index;
-    if (player === 'Bottom') id += this.CAPTIVE_AREA_SIZE;
+    let id = Board.BOARD_WIDTH * Board.BOARD_HEIGHT + index;
+    if (player === 'Bottom') id += Board.CAPTIVE_AREA_SIZE;
     return new SquareId(id);
+  }
+
+  equals(other: SquareId) {
+    return this.id === other.id;
   }
 }

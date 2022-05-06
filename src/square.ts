@@ -3,9 +3,11 @@ import { Piece } from './peice/piece';
 export class Square {
   piece: Piece;
   isSelected: boolean;
+  isHighLighted: boolean;
 
   constructor(piece: Piece = Piece.empty()) {
-    this.isSelected = false;
     this.piece = piece;
+    this.isSelected = false;
+    this.isHighLighted = false;
   }
 }
