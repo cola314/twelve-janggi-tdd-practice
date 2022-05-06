@@ -1,6 +1,7 @@
 import { Piece } from './peice/piece';
 import { SquareId } from './square-id';
 import { Square } from './square';
+import assert from 'assert';
 
 export class Board {
   static readonly BOARD_WIDTH = 3;
@@ -24,15 +25,15 @@ export class Board {
     });
     for (let x = 1; x <= Board.BOARD_WIDTH; x++) {
       for (let y = 1; y <= Board.BOARD_HEIGHT; y++) {
-        let currentId = SquareId.fromBoard(x, y);
+        let currentId = SquareId.fromBoardOrNull(x, y);
         const square = this.getSquare(currentId);
         if (currentId.equals(squareId)) {
           square.isSelected = true;
           for (let nx = x - 1; nx <= x + 1; nx++) {
             for (let ny = y - 1; ny <= y + 1; ny++) {
-              if (1 <= nx && nx <= Board.BOARD_WIDTH && 1 <= ny && ny <= Board.BOARD_HEIGHT) {
-                if (nx == x && ny == y) continue;
-                const highlightedId = SquareId.fromBoard(ny, nx);
+              if (nx == x && ny == y) continue;
+              const highlightedId = SquareId.fromBoardOrNull(nx, ny);
+              if (highlightedId != null) {
                 this.getSquare(highlightedId).isHighLighted = true;
               }
             }

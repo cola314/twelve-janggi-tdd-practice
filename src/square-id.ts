@@ -1,6 +1,16 @@
 import { PlayerType } from './player';
 import { Board } from './board';
 
+interface Coordinate {
+  x: number;
+  y: number;
+}
+
+interface CaptiveArea {
+  player: PlayerType;
+  index: Number;
+}
+
 /**
 |--------------------|
 | 12 13 14 15 16 17  | Top Player captive Area
@@ -26,10 +36,13 @@ export class SquareId {
    * @param y 1-based
    * @constructor
    */
-  static fromBoard(x: number, y: number) {
-    x--;
-    y--;
-    return new SquareId(x + y * Board.BOARD_WIDTH);
+  static fromBoardOrNull(x: number, y: number): SquareId | null {
+    if (1 <= x && x <= Board.BOARD_WIDTH && 1 <= y && y <= Board.BOARD_HEIGHT) {
+      x--;
+      y--;
+      return new SquareId(x + y * Board.BOARD_WIDTH);
+    }
+    return null;
   }
 
   /**
@@ -38,14 +51,49 @@ export class SquareId {
    * @param index 1-based
    * @constructor
    */
-  static fromCaptive(player: PlayerType, index: number): SquareId {
+  static fromCaptiveOrNull(player: PlayerType, index: number): SquareId | null {
     index--;
     let id = Board.BOARD_WIDTH * Board.BOARD_HEIGHT + index;
     if (player === 'Bottom') id += Board.CAPTIVE_AREA_SIZE;
     return new SquareId(id);
   }
 
+  toBoardCoordinateOrNull(): Coordinate | null {
+    if (this.id < Board.BOARD_WIDTH * Board.BOARD_HEIGHT) {
+      return {
+        x: (this.id % Board.BOARD_WIDTH) + 1,
+        y: this.id / Board.BOARD_HEIGHT + 1,
+      };
+    }
+    return null;
+  }
+
+  toCaptiveIndexOrNull(): CaptiveArea | null {
+    if (this.id >= Board.BOARD_WIDTH * Board.BOARD_HEIGHT) {
+      let index = this.id - Board.BOARD_HEIGHT * Board.BOARD_WIDTH;
+      if (index >= Board.CAPTIVE_AREA_SIZE) {
+        return {
+          player: 'Bottom',
+          index: index - Board.CAPTIVE_AREA_SIZE + 1,
+        };
+      }
+      return {
+        player: 'Top',
+        index: index + 1,
+      };
+    }
+    return null;
+  }
+
   equals(other: SquareId) {
     return this.id === other.id;
+  }
+
+  addCoordinateOrNull(dx: number, dy: number): SquareId | null {
+    const cd = this.toBoardCoordinateOrNull();
+    if (cd) {
+      return SquareId.fromBoardOrNull(cd.x + dx, cd.y + dy);
+    }
+    return null;
   }
 }
