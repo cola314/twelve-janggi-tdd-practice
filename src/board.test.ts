@@ -17,3 +17,15 @@ test('select square then adjacent square highlighted', () => {
   expect(board.getSquare(SquareId.fromBoard(2, 3)).isHighLighted).toBe(true);
   expect(board.getSquare(SquareId.fromBoard(3, 3)).isHighLighted).toBe(true);
 });
+
+test('clear highlighted square test', () => {
+  const board = new Board();
+  board.putPiece(SquareId.fromBoard(1, 1), Piece.king('Top'));
+  board.putPiece(SquareId.fromBoard(3, 4), Piece.king('Top'));
+  board.select(SquareId.fromBoard(1, 1));
+  board.select(SquareId.fromBoard(3, 4));
+  expect(board.getSquare(SquareId.fromBoard(1, 1)).isHighLighted).toBe(false);
+  expect(board.getSquare(SquareId.fromBoard(2, 1)).isHighLighted).toBe(false);
+  expect(board.getSquare(SquareId.fromBoard(1, 2)).isHighLighted).toBe(false);
+  expect(board.getSquare(SquareId.fromBoard(2, 2)).isHighLighted).toBe(false);
+});
