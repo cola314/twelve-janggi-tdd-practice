@@ -23,24 +23,10 @@ export class Board {
       square.isSelected = false;
       square.isHighLighted = false;
     });
-    for (let x = 1; x <= Board.BOARD_WIDTH; x++) {
-      for (let y = 1; y <= Board.BOARD_HEIGHT; y++) {
-        let currentId = SquareId.fromBoardOrNull(x, y);
-        const square = this.getSquare(currentId);
-        if (currentId.equals(squareId)) {
-          square.isSelected = true;
-          for (let nx = x - 1; nx <= x + 1; nx++) {
-            for (let ny = y - 1; ny <= y + 1; ny++) {
-              if (nx == x && ny == y) continue;
-              const highlightedId = SquareId.fromBoardOrNull(nx, ny);
-              if (highlightedId != null) {
-                this.getSquare(highlightedId).isHighLighted = true;
-              }
-            }
-          }
-        }
-      }
-    }
+    const selectedSquare = this.getSquare(squareId);
+    selectedSquare.isSelected = true;
+    const movableArea = selectedSquare.piece.movableArea(squareId);
+    movableArea.forEach(id => (this.getSquare(id).isHighLighted = true));
   }
 
   putPiece(squareId: SquareId, piece: Piece) {

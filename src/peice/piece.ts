@@ -48,6 +48,24 @@ class PieceKing extends Piece {
   constructor(owner: PlayerType) {
     super('King', owner);
   }
+
+  movableArea(squareId: SquareId): SquareId[] {
+    if (squareId.isCaptiveArea()) {
+      return SquareId.playerAllowedArea(this.owner as PlayerType);
+    }
+    return [
+      [-1, -1],
+      [0, -1],
+      [1, -1],
+      [-1, 0],
+      [1, 0],
+      [-1, 1],
+      [0, 1],
+      [1, 1],
+    ]
+      .map(x => squareId.addCoordinateOrNull(x[0], x[1]))
+      .filter(x => x !== null);
+  }
 }
 
 class PieceSang extends Piece {
@@ -71,7 +89,7 @@ class PieceJa extends Piece {
     if (squareId.isCaptiveArea()) {
       return SquareId.playerAllowedArea(this.owner as PlayerType);
     }
-    if (this.owner == 'Top') {
+    if (this.owner === 'Top') {
       return [squareId.addCoordinateOrNull(0, 1)].filter(x => x !== null);
     } else {
       return [squareId.addCoordinateOrNull(0, -1)].filter(x => x !== null);

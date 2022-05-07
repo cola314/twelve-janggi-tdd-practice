@@ -1,6 +1,5 @@
 import { PlayerType } from './player';
 import { Board } from './board';
-import { OwnerType } from './peice/piece';
 
 interface Coordinate {
   x: number;
@@ -63,7 +62,7 @@ export class SquareId {
     if (this.id < Board.BOARD_WIDTH * Board.BOARD_HEIGHT) {
       return {
         x: (this.id % Board.BOARD_WIDTH) + 1,
-        y: this.id / Board.BOARD_HEIGHT + 1,
+        y: Math.trunc(this.id / Board.BOARD_WIDTH) + 1,
       };
     }
     return null;
