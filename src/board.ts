@@ -1,7 +1,6 @@
-import { Piece } from './peice/piece';
+import { Piece } from './piece/piece';
 import { SquareId } from './square-id';
 import { Square } from './square';
-import assert from 'assert';
 
 export class Board {
   static readonly BOARD_WIDTH = 3;

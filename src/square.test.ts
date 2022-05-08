@@ -1,5 +1,5 @@
 import { Square } from './square';
-import { Piece } from './peice/piece';
+import { Piece } from './piece/piece';
 
 test('select square', () => {
   let square = new Square(Piece.ja('Top'));

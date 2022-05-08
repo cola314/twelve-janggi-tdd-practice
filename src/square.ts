@@ -1,4 +1,4 @@
-import { Piece } from './peice/piece';
+import { Piece } from './piece/piece';
 
 export class Square {
   piece: Piece;

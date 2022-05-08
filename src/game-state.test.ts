@@ -1,4 +1,4 @@
-import { Piece } from './peice/piece';
+import { Piece } from './piece/piece';
 import { SquareId } from './square-id';
 import { GameState } from './game-state';
 

@@ -1,5 +1,5 @@
 import { Square } from './square';
-import { Piece } from './peice/piece';
+import { Piece } from './piece/piece';
 import { SquareId } from './square-id';
 
 export class GameState {

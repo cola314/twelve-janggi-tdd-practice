@@ -1,5 +1,5 @@
 import { SquareId } from './square-id';
-import { Piece } from './peice/piece';
+import { Piece } from './piece/piece';
 import { Board } from './board';
 
 test('select square then adjacent square highlighted', () => {
